@@ -1,0 +1,10 @@
+{% extends 'layout.html' %} {% block title %} Вход {% endblock %} {% block content %}
+<h1>Вход</h1>
+<form class="form-with-validation" action="/users/login/" method="post">
+    {% csrf_token %} {{ form }}
+    <button class="form-submit">Отправить</button>
+    {% if request.GET.next %}
+    <input type="hidden" name="next" value="{{ request.GET.next }}" />
+    {% endif %}
+</form>
+{% endblock %}
