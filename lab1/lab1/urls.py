@@ -19,12 +19,17 @@ from django.urls import path, include
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.urls import path, include, re_path
+from django.views.static import serve
 
+
+    
 
 urlpatterns = [
     # Объявление переменной `urlpatterns`, которая содержит список маршрутов
     # (URL-адресов) для сопоставления запросов с обработчиками.
-
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     path('admin/', admin.site.urls),
     # Маршрут, связывающий URL `/admin/` с встроенным интерфейсом администратора Django.
     # `admin.site.urls` — это готовый обработчик, предоставляемый Django для работы с админкой.
@@ -41,5 +46,3 @@ urlpatterns = [
     path('users/', include('users.urls')),
 
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

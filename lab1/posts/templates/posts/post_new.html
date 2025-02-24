@@ -1,6 +1,16 @@
-{% extends 'layout.html' %} {% block title %} Новый пост {% endblock %}
+{% extends 'layout.html' %}
+
+{% block title %}
+   New Post
+{% endblock %}
+
 {% block content %}
-<section>
-    <h1>Новый пост</h1>
-</section>
+    <section>
+        <h1>New Post</h1>
+        <form class="form-with-validation" action="{% url 'posts:new-post' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %} 
+            {{ form }}
+            <button class="form-submit">Добавить пост</button>
+        </form>
+    </section>
 {% endblock %}
